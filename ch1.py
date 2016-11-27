@@ -51,9 +51,24 @@ for j in ["text"+str(i) for i in range(1,10)]:
 sortedSetText2 = sorted(set(text2))
 #obtain length of sorted set
 len(sortedSetText2)
-len(text3)
+len(text2)
 #lexical richness of text,
 #need to cast float.either float(b) or a/(b*1.0) (preferred) or from __future__ import division (python3)
 lexRichText2 = len(sortedSetText2)/float(len(text2))
 print "Lexical richness: Number of distinct words is just", lexRichText2*100,"% of the total number of words"
 print "equivalently that each word is used", float(len(text2))/len(sortedSetText2) ,"times on average"
+# frequency of a word in a text - is case sensitive
+lolCount = text5.count("lol")
+print "The word lol appears",lolCount,"times in text5 - Chat corpus"
+print "It takes up",lolCount*100/(len(text5)*1.0),"% of the text"
+
+#fuction examples
+def lexical_diversity(text):
+    lexDiv = len(set(text))*100/(len(text)*1.0)
+    avgNoOfTimesPerWord = float(len(text2))/len(sortedSetText2)    
+    print "Lexical richness: Number of distinct words is just", lexDiv,"% of the total number of words"
+    print "equivalently that each word is used", avgNoOfTimesPerWord ,"times on average"
+    return
+    
+def percentage(count, total) :
+    return count*100/total
