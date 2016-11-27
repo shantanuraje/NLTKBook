@@ -45,3 +45,15 @@ text9.dispersion_plot(["man","artist","anarchist"])
 # print len of all texts - 
 for j in ["text"+str(i) for i in range(1,10)]:
     print j,":",len(eval(j)) # eval to evaluate "textX" string as input
+    #includes words and punctuation symbols i.e tokens
+
+#obtain sorted list of vocab items, set returns distinct items (word types) in set
+sortedSetText2 = sorted(set(text2))
+#obtain length of sorted set
+len(sortedSetText2)
+len(text3)
+#lexical richness of text,
+#need to cast float.either float(b) or a/(b*1.0) (preferred) or from __future__ import division (python3)
+lexRichText2 = len(sortedSetText2)/float(len(text2))
+print "Lexical richness: Number of distinct words is just", lexRichText2*100,"% of the total number of words"
+print "equivalently that each word is used", float(len(text2))/len(sortedSetText2) ,"times on average"
