@@ -72,3 +72,36 @@ def lexical_diversity(text):
     
 def percentage(count, total) :
     return count*100/total
+    
+#frequency distributions of words -built in function FreqDist
+fdist1 = FreqDist(text3)
+print fdist1
+fdist1.most_common(50)
+fdist1.plot(50)
+fdist1.plot(50,cumulative=True)
+
+#hapaxes?
+fdist2 = FreqDist(text2)
+fdist2.hapaxes()
+
+#words > length x in text words
+textSet = set(text6)
+long_words = [w for w in textSet if len(w)>10] # no words longer then 13, 44 10 letter words
+
+# frequent long words 
+frequent_long_words = [w for w in textSet if len(w)>11 and fdist2[w]>5]
+
+#collocations and bigrams
+#bigrams() # bigrams function is not available ??
+text6.collocations()
+
+#frequency distrubution of length of words
+fworddist = FreqDist([len(w) for w in text6])
+fworddist.plot()
+fworddist.most_common()
+#FreqDist are of type probability.FreqDist with word and counts table
+fdist1 |= fdist2 # 
+# print words in text2 that have substrin cei or cie 
+tricky = sorted(w for w in set(text2) if 'cie' in w or 'cei' in w)
+for word in tricky:
+    print word
