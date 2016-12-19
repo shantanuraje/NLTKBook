@@ -118,10 +118,12 @@ print (text2[len(text2)-2:])
 freqDistText5 = FreqDist(text5)
 text5FourLetterWords = sorted(set([w for w in text5 if w.isalpha() and len(w) == 4]))
 print (text5FourLetterWords)
-print (type(freqDistText5))
-for sample in freqDistText5:
-    print (sample)
-    print (text5FourLetterWords.index(sample))
+print (freqDistText5)
+for sample in [w for w in freqDistText5]:
+    if sample not in text5FourLetterWords:
+        freqDistText5.pop(sample)
+print (freqDistText5)
+freqDistText5.plot(50)
 
 #23 Review the discussion of looping with conditions in 4. Use a combination of for and if statements to loop over the words of the movie script for Monty Python and the Holy Grail (text6) and print all the uppercase words, one per line.
 
