@@ -11,6 +11,9 @@ from nltk.corpus import stopwords # list of stopwords
 from nltk.corpus import words # english vocabulary
 from nltk.corpus import names # male-female names
 from nltk.corpus import cmudict #pronouncing dictionary
+from nltk.corpus import swadesh # comparative wordlist, lists 200 common words in several languages
+from nltk.corpus import toolbox #tool used to manage data
+from nltk.corpus import wordnet #english dictionary like thesaurus with richer structure
 
 print("text_name  |  num_of_chars  |  num_of_words  |  num_of_sentences  |  num_of_vocab_items  |  avg_word_len  |  avg_sent_len  |  lexical_diversity")
 
@@ -197,3 +200,81 @@ print(prondict['file'])
 print(prondict['clog'])
 prondict['blog'] = [['B', 'L', 'AA1', 'G']] #assign pronunciation data to non existent key (temporary)
 print(prondict['blog'])
+#comparative wordlists- identified by is0 639 two letter code
+print(swadesh.fileids())
+print(swadesh.words('en'))
+print(swadesh.words('uk'))
+#cognate words - words with similar meanings
+de2en = swadesh.entries(['de','en'])
+print(de2en)
+translate = dict(de2en)
+print(translate['ich'],translate['Sonne'])
+#add more languages to dictionary
+fr2en = swadesh.entries(['fr','en'])
+es2en = swadesh.entries(['es','en'])
+translate.update(dict(fr2en))
+translate.update(dict(es2en))
+print(translate['chien'])
+print(translate['perro'])
+#compare words in other germanic and romance languages
+languages = ['en', 'de', 'nl', 'es', 'fr', 'pt', 'la']
+for i in [138,142,143,160]:
+    print(swadesh.entries(languages)[i])
+#toolbox / shoebox
+print(toolbox.entries('rotokas.dic'))
+#wordnet
+wordnet.synsets('motorcar')
+print(wordnet.synset('car.n.01').lemma_names())
+print(wordnet.synset('car.n.01').definition())
+print(wordnet.synset('car.n.01').examples())
+print(wordnet.synset('car.n.01').lemmas())
+print(wordnet.lemma('car.n.01.automobile'))
+print(wordnet.lemma('car.n.01.automobile').synset())
+print(wordnet.lemma('car.n.01.automobile').name())
+print(wordnet.synsets('car')) # car is ambiguous, has five synsets
+for synset in wordnet.synsets('car'):
+    print(synset.lemma_names())
+print(wordnet.lemmas('car'))
+#senses of the word dish
+for synset in wordnet.synsets('dish'):
+    print(synset.lemma_names())
+#looking for hyponyms of motorcar
+motorcar = wordnet.synset('car.n.01')
+types_of_motorcar = motorcar.hyponyms()
+print(types_of_motorcar)
+print(sorted(lemma.name() for synset in types_of_motorcar for lemma in synset.lemmas()))
+#looking at hypernyms
+print(motorcar.hypernyms())
+print(motorcar.root_hypernyms()) #most general (root) hypernym
+#hypernyms, hyponyms, meronyms (components), holonyms (things they are contained in)
+#example tree made up of trunk, crown, etc (part_meronyms); substance tree is made of heartwood, sapwood (substance_meronyms); collection of trees is a forest (member_holonyms)
+print(wordnet.synset('tree.n.01').part_meronyms())
+print(wordnet.synset('tree.n.01').substance_meronyms())
+print(wordnet.synset('tree.n.01').member_holonyms())
+#other example - mint
+for synset in wordnet.synsets('mint',wordnet.NOUN):
+    print(synset.name()," : ",synset.definition())
+print(wordnet.synset('mint.n.04').part_holonyms())
+print(wordnet.synset('mint.n.04').substance_holonyms())
+#relatioship between words - entailments, antonymy?
+print(wordnet.synset('walk.v.01').entailments())
+print(wordnet.synset('eat.v.01').entailments())
+print(wordnet.synset('tease.v.03').entailments())
+print(wordnet.lemma('supply.n.02.supply').antonyms())
+print(wordnet.lemma('rush.v.01.rush').antonyms())
+print(wordnet.lemma('horizontal.a.01.horizontal').antonyms())
+print(wordnet.lemma('staccato.r.01.staccato').antonyms())
+right = wordnet.synset('right_whale.n.01')
+orca = wordnet.synset('orca.n.01')
+minke = wordnet.synset('minke_whale.n.01')
+tortoise = wordnet.synset('tortoise.n.01')
+novel = wordnet.synset('novel.n.01')
+print(right.lowest_common_hypernyms(minke), wordnet.synset('baleen_whale.n.01').min_depth()) # also depth of each synset, lower the number more the generality
+print(right.lowest_common_hypernyms(orca), wordnet.synset('whale.n.02').min_depth())
+print(right.lowest_common_hypernyms(tortoise), wordnet.synset('vertebrate.n.01').min_depth())
+print(right.lowest_common_hypernyms(novel), wordnet.synset('entity.n.01').min_depth())
+#similarity measures between words - assigns score in range 0-1, if compared to self returns 1, if not found -1
+print(right.path_similarity(minke))
+print(right.path_similarity(orca))
+print(right.path_similarity(tortoise))
+print(right.path_similarity(novel))
