@@ -1,13 +1,58 @@
-
+import nltk
+from nltk.corpus import gutenberg
+from nltk.corpus import brown
+from nltk.corpus import state_union
+from nltk.corpus import wordnet as wn
 #1 Create a variable phrase containing a list of words. Review the operations described in the previous chapter, including addition, multiplication, indexing, slicing, and sorting.
+tempPhrase = ["Create", "a", "variable", "phrase", "containing", "a", "list", "of", "words"]
+print(tempPhrase+tempPhrase)
+print(tempPhrase*3)
+print(tempPhrase[5])
+print(tempPhrase[-4:])
+print(sorted(w.lower() for w in set(tempPhrase))) #only sort puts capital letters first
 
 #2 Use the corpus module to explore austen-persuasion.txt. How many word tokens does this book have? How many word types?
+austen_persuasion = gutenberg.words('austen-persuasion.txt')
+print("Number of word tokens = ",len(austen_persuasion))
+print("Number of word types = ",len(set(austen_persuasion)))
 
 #3 Use the Brown corpus reader nltk.corpus.brown.words() or the Web text corpus reader nltk.corpus.webtext.words() to access some sample text in two different genres.
+print(brown.categories())
+news_data=brown.words(categories='news')
+religion_data=brown.words(categories='religion')
 
 #4 Read in the texts of the State of the Union addresses, using the state_union corpus reader. Count occurrences of men, women, and people in each document. What has happened to the usage of these words over time?
+print(state_union.fileids())
+#cfd for inaugral address speeches for each president showing count of words american and citizen each speech
+cfd = nltk.ConditionalFreqDist((target,fileid[:4])for fileid in state_union.fileids() for w in state_union.words(fileid) for target in  ['men','women'] if w.lower().startswith(target))
+#cfd.plot()
 
 #5 Investigate the holonym-meronym relations for some nouns. Remember that there are three kinds of holonym-meronym relation, so you need to use: member_meronyms(), part_meronyms(), substance_meronyms(), member_holonyms(), part_holonyms(), and substance_holonyms().
+house = wn.synsets('house')
+print(house)
+house = wn.synset('house.n.01')
+print(house.lemma_names())
+print(house.definition())
+print(house.examples())
+print(house.member_meronyms())
+print(house.part_meronyms())
+print(house.substance_meronyms())
+print(house.member_holonyms())
+print(house.part_holonyms())
+print(house.substance_holonyms())
+
+food = wn.synsets('food')
+print(food)
+food = wn.synset('food.n.01')
+print(food.lemma_names())
+print(food.definition())
+print(food.examples())
+print(food.member_meronyms())
+print(food.part_meronyms())
+print(food.substance_meronyms())
+print(food.member_holonyms())
+print(food.part_holonyms())
+print(food.substance_holonyms())
 
 #6 In the discussion of comparative wordlists, we created an object called translate which you could look up using words in both German and Spanish in order to get corresponding words in English. What problem might arise with this approach? Can you suggest a way to avoid this problem?
 
