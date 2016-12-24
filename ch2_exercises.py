@@ -3,6 +3,11 @@ from nltk.corpus import gutenberg
 from nltk.corpus import brown
 from nltk.corpus import state_union
 from nltk.corpus import wordnet as wn
+from nltk.corpus import swadesh
+from nltk.book import text1 as mobydick #mobydick
+from nltk.book import text2 as sense_and_sensibility #sense_and_sensibility
+from nltk.corpus import names # male-female names
+
 #1 Create a variable phrase containing a list of words. Review the operations described in the previous chapter, including addition, multiplication, indexing, slicing, and sorting.
 tempPhrase = ["Create", "a", "variable", "phrase", "containing", "a", "list", "of", "words"]
 print(tempPhrase+tempPhrase)
@@ -55,14 +60,42 @@ print(food.part_holonyms())
 print(food.substance_holonyms())
 
 #6 In the discussion of comparative wordlists, we created an object called translate which you could look up using words in both German and Spanish in order to get corresponding words in English. What problem might arise with this approach? Can you suggest a way to avoid this problem?
+translate = dict()
+de2en = swadesh.entries(['de','en'])
+es2en = swadesh.entries(['es','en'])
+translate.update(dict(de2en))
+translate.update(dict(es2en))
+print(translate)
+#one word could have multiple corresponding words or vice versa?
+#keep only one in dictionary???
 
 #7 According to Strunk and White's Elements of Style, the word however, used at the start of a sentence, means "in whatever way" or "to whatever extent", and not "nevertheless". They give this example of correct usage: However you advise him, he will probably do as he thinks best. (http://www.bartleby.com/141/strunk3.html) Use the concordance tool to study actual usage of this word in the various texts we have been considering. See also the LanguageLog posting "Fossilized prejudices about 'however'" at http://itre.cis.upenn.edu/~myl/languagelog/archives/001913.html
+print(mobydick.concordance('however'))
+print(sense_and_sensibility.concordance('however'))
 
 #8 Define a conditional frequency distribution over the Names corpus that allows you to see which initial letters are more frequent for males vs. females (cf. 4.4).
+#cfd against last letters for all names to check well known fact that names ending in letter a are almost always female
+cfd = nltk.ConditionalFreqDist((fileid,name[1]) for fileid in names.fileids() for name in names.words(fileid))
+cfd.plot()
 
 #9 Pick a pair of texts and study the differences between them, in terms of vocabulary, vocabulary richness, genre, etc. Can you find pairs of words which have quite different meanings across the two texts, such as monstrous in Moby Dick and in Sense and Sensibility?
+#already have news and religion data from brown corpus
+#concordance works on Text objects, so need to instantiate a Text with news and religion data
+news_data = nltk.Text(news_data)
+religion_data = nltk.Text(religion_data)
+#trying to find common words
+news_fd = nltk.FreqDist(news_data)
+religion_fd = nltk.FreqDist(religion_data)
+print(news_data.concordance('state'))
+print(religion_data.concordance('state'))
 
 #10 Read the BBC News article: UK's Vicky Pollards 'left behind' http://news.bbc.co.uk/1/hi/education/6173441.stm. The article gives the following statistic about teen language: "the top 20 words used, including yeah, no, but and like, account for around a third of all words." How many word types account for a third of all word tokens, for a variety of text sources? What do you conclude about this statistic? Read more about this on LanguageLog, at http://itre.cis.upenn.edu/~myl/languagelog/archives/003993.html.
+fdist1 = nltk.FreqDist(nltk.book.text3)
+print(fdist1)
+fdist1.most_common(50)
+fdist1.plot(50)
+fdist1.plot(50,cumulative=True)
+#true, most words in text are stop words!!
 
 #11 Investigate the table of modal distributions and look for other patterns. Try to explain them in terms of your own impressionistic understanding of the different genres. Can you find other closed classes of words that exhibit significant differences across different genres?
 
