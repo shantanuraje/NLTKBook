@@ -1,4 +1,4 @@
-import nltk, re, feedparser, unicodedata
+import nltk, re, feedparser, unicodedata, pprint
 from nltk import word_tokenize
 from urllib import request
 from bs4 import BeautifulSoup
@@ -209,3 +209,31 @@ print(re.findall(r"\w+(?:[-']\w+)*|'|[-.(]+|\S\w*", raw)) #[-.(]= causes double 
 
 #nltk's regexp tokenizer
 #try using nltk.regexp_tokenize(text,pattern)
+
+#segmentation
+#sentence segmentation
+#compute average number of words per sentence in Brown corpus
+print(len(brown.words())/len(brown.sents()))
+#Unsupervised Multilingual Sentence Boundary Detection by kiss & Strunk
+text=gutenberg.raw('chesterton-thursday.txt')
+sents=nltk.sent_tokenize(text)
+pprint.pprint(sents[70:90])
+
+#word segmentation when no word boundary exists
+text = "doyouseethekittyseethedoggydoyoulikethekittylikethedoggy"
+#1's in the segment indicate whether or not a wordbrea appears after the character
+seg1 = "0000000000000001000000000010000000000000000100000000000"
+seg2 = "0100100100100001001001000010100100010010000100010010000"
+def segment(text, segs):
+    words = []
+    last = 0
+    for i in range(len(segs)):
+        if segs[i] == '1':
+            words.append(text[last:i+1])
+            last = i+1
+    words.append(text[last:])
+    return words
+
+print(segment(text,seg1))
+print(segment(text,seg2))
+#revisit and read objective function, non deterministic search using simulated annealing

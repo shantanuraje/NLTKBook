@@ -77,10 +77,11 @@
       <file leaf-file-name="ch3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ch3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
-              <caret line="211" column="0" lean-forward="true" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
+            <state relative-caret-position="720">
+              <caret line="239" column="0" lean-forward="true" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
               <folding>
-                <element signature="e#0#40#0" expanded="true" />
+                <element signature="e#0#48#0" expanded="true" />
+                <element signature="e#10310#10502#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -481,7 +482,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#10310#10502#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -491,7 +493,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#10310#10502#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -501,7 +504,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#10310#10502#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -511,7 +515,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#10310#10502#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,7 +526,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#10310#10502#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -586,10 +592,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ch3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="211" column="0" lean-forward="true" selection-start-line="211" selection-start-column="0" selection-end-line="211" selection-end-column="0" />
+        <state relative-caret-position="720">
+          <caret line="239" column="0" lean-forward="true" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#10310#10502#0" expanded="false" />
           </folding>
         </state>
       </provider>
