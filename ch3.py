@@ -3,6 +3,7 @@ from nltk import word_tokenize
 from urllib import request
 from bs4 import BeautifulSoup
 from nltk.corpus import words # english vocabulary
+from nltk.corpus import gutenberg, nps_chat, brown
 
 ##uncomment this block after gutenberg ban lifts
 ##get file from url
@@ -37,7 +38,7 @@ print(llog['feed']['title'])
 print(len(llog.entries))
 for entry in llog.entries:
     print(entry.title)
-    
+
 #read local file
 tale_of_peter = open('tale_of_peter_rabbit.txt') # r for reading, U for Universal - to ignore different conventions used to mark newlines
 print(tale_of_peter.read())
@@ -55,8 +56,6 @@ f=open(path, encoding='latin2')
 for line in f:
   print(line) #if we want to print \xXX or \uXXXX representations, use print(line.encode('unicode_escape'))
 
-
-#statements below work but also cause internal console errors
 print(ord('ń') )
 nacute='\u0144'
 print(nacute)
@@ -84,3 +83,129 @@ print([w for w in wordlist if re.search("ed$",w)])
 #words having j as 3rd,t as 6th, letters with fixed number of letters in between
 print([w for w in wordlist if re.search('^..j..t..$',w)])
 print([w for w in wordlist if re.search('..j..t..',w)]) #gives any number of chars before j and after t, but only two characters between j and t
+print([w for w in wordlist if re.search("^[ghi][mno][jlk][def]$",w)])
+#finger twisters - words that can be typed using only certain parts of the t9 keypad
+print([w for w in wordlist if re.search("^[ghijklmno]+$",w)]) #only use numbers 4 5 6
+print([w for w in wordlist if re.search("^[abcdef]+$",w)]) #only use numbers 2 3
+print([w for w in wordlist if re.search("^[defmnowxyz]+$",w)]) #only use numbers 3 6 9
+chat_words=sorted(set(w for w in nltk.corpus.nps_chat.words()))
+print([w for w in chat_words if re.search("^m+i+n+e+$",w)]) # starting with m,end with e, 1 or more occurences of m i n e
+print([w for w in chat_words if re.search("^[ha]+$",w)]) # starting with h or a, one more occurences of h or a
+print([w for w in chat_words if re.search("^[^aeiouAEIOU]+$",w)]) # anything but vowels
+
+treebank_data=sorted(set(nltk.corpus.treebank.words()))
+print([w for w in treebank_data if re.search('^[0-9]+\.[0-9]+$',w)])
+print([w for w in treebank_data if re.search('^[A-Z]+\$$',w)])
+print([w for w in treebank_data if re.search('^[0-9]{4}$',w)])
+print([w for w in treebank_data if re.search('^[0-9]+-[a-z]{3,5}$', w)])
+print([w for w in treebank_data if re.search('^[a-z]{5,}-[a-z]{2,3}-[a-z]{,6}$', w)])
+print([w for w in treebank_data if re.search('(ed|ing)$', w)])
+#extracting word pieces
+#check for all vowels in words, find number of vowels
+word = 'supercalifragilisticexpialidocious'
+print(re.findall(r'[aeiou]',word))
+print(len(re.findall(r'[aeiou]',word)))
+#look for all sequences of 2 or more vowels, determine relative frequency
+vowel_sequences=nltk.FreqDist(vs for word in treebank_data for vs in re.findall(r'[aeiou]{2,}',word))
+print(vowel_sequences.most_common(30))
+print([int(n) for n in re.findall(r'([0-9]{4}|[0-9]{2}|[0-9]{2})', '2009-12-31')])
+#leave word internal vowels out to make text readable
+regexp=r'^[AEIOUaeiou]+|[AEIOUaeiou]+$|[^AEIOUaeiou]'
+def compress(word):
+    pieces=re.findall(regexp,word)
+    return ''.join(pieces)
+
+english_udhr=nltk.corpus.udhr.words('English-Latin1')
+print(nltk.tokenwrap(compress(w) for w in english_udhr[:75]))
+#conditional frequency distribution with regular expressions
+#extract consonant-vowel sequences, since each is a pair we can use cfd
+rotokas_words=nltk.corpus.toolbox.words('rotokas.dic')
+#have a dict of the words containing the cv sequence
+cvs=[(cv,w) for w in rotokas_words for cv in re.findall(r'[ptksvr][aeiou]',w)]
+cfd=nltk.ConditionalFreqDist(cvs)
+cfd.tabulate()
+cv_index=nltk.Index(cvs)
+print(cv_index['po'])
+print(cv_index['ke'])
+#simple stem function
+def stem(word):
+    for suffix in ['ing', 'ly', 'ed', 'ious', 'ies', 'ive', 'es', 's', 'ment']:
+        if word.endswith(suffix):
+            return word[:-len(suffix)]
+    return word
+
+wordlist_stems=[stem(w) for w in wordlist]
+print(wordlist)
+#using regex
+wordlist_suffixes=[suffix for w in wordlist for suffix in re.findall(r'^.*(ing|ly|ed|ious|ies|ive|es|s|ment)$',w)]
+print(nltk.FreqDist(wordlist_suffixes).most_common(20))
+raw = """DENNIS: Listen, strange women lying in ponds distributing swords is no basis for a system of government.  Supreme executive power derives from a mandate from the masses, not from some farcical aquatic ceremony."""
+raw_tokens=word_tokenize(raw)
+raw_stems=[stem(t) for t in raw_tokens]
+print(raw_stems)
+
+#searching tokenized text
+moby=nltk.Text(gutenberg.words('melville-moby_dick.txt'))
+print(moby.findall(r'<a><man>')) #print only a man
+print(moby.findall(r'<a>(<.*>)<man>')) #prints words between a and man
+chat_words=nltk.Text(nps_chat.words())
+print(chat_words.findall(r'<.*><.*><bro>'))
+print(chat_words.findall(r'<1.*>{3,}'))
+#discover hypernyms in text i.e a and other ys
+hobbies_learned=nltk.Text(brown.words(categories=['hobbies','learned']))
+print(hobbies_learned.findall(r'<\w*><and><other><\w*s>'))
+print(hobbies_learned.findall(r'<\w*><as><\w*>'))
+
+#text normalization
+#stemmers - to remove affixes from words, 2 off-the-shelf in nltk 1.PorterStemmer 2.LancasterStemmer
+print(raw_tokens)
+porter=nltk.PorterStemmer()
+lancaster=nltk.LancasterStemmer()
+print([porter.stem(w) for w in raw_tokens])
+print([lancaster.stem(w) for w in raw_tokens])
+#Indexing a Text Using a Stemmer, support search for alternative forms of words
+#revise later
+class IndexedText(object):
+    def __init__(self, stemmer, text):
+        self._text = text
+        self._stemmer = stemmer
+        self._index = nltk.Index((self._stem(word), i)
+                                 for (i, word) in enumerate(text))
+
+    def concordance(self, word, width=40):
+        key = self._stem(word)
+        wc = int(width/4)                # words of context
+        for i in self._index[key]:
+            lcontext = ' '.join(self._text[i-wc:i])
+            rcontext = ' '.join(self._text[i:i+wc])
+            ldisplay = '{:>{width}}'.format(lcontext[-width:], width=width)
+            rdisplay = '{:{width}}'.format(rcontext[:width], width=width)
+            print(ldisplay, rdisplay)
+
+    def _stem(self, word):
+        return self._stemmer.stem(word).lower()
+grail=nltk.corpus.webtext.words('grail.txt')
+text=IndexedText(porter,grail)
+text.concordance('lie')
+#lemmatizer - making sure resulting word is in the dictionary then remove affixes
+wnl=nltk.WordNetLemmatizer()
+print([wnl.lemmatize(t) for t in raw_tokens])
+
+#simple approaches to tokenizing text
+raw = """'When I'M a Duchess,' she said to herself, (not in a very hopeful tone
+though), 'I won't have any pepper in my kitchen AT ALL. Soup does very
+well without--Maybe it's always pepper that makes people hot-tempered,'..."""
+#easiest approach is to split by ' ', leaves out \n and tabs
+print(raw.split(' '))
+print(re.split(r'[ \t\n]+',raw)) #notice the space
+print(re.split(r'\s+',raw)) #includes any white space character
+print(re.split(r'\w+',raw)) #try 'xx'.split('x')
+print(re.findall(r'\w+',raw))#why does this happen?
+print(re.split(r'\W+',raw)) #complement of \w, all characters other than letters, digits and underscores
+print(re.findall(r'\w+|\S\w*',raw)) #first match sequence of word chars, if no match try to match any non-whitespace character(complement of \s) followed by other word characters
+print(re.findall(r'\w+([-\']\w+)*',raw)) #permit word internal hyphens and apostrophes, this expression means \w+ followed by zero or more instances of [-']\w+
+print(re.findall(r'\w+(?:[-\']\w+)*',raw))
+print(re.findall(r"\w+(?:[-']\w+)*|'|[-.(]+|\S\w*", raw)) #[-.(]= causes double hyphen, ellipsis and open parenthesis get tokenized separately
+
+#nltk's regexp tokenizer
+#try using nltk.regexp_tokenize(text,pattern)
