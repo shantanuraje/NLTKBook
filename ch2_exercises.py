@@ -7,6 +7,8 @@ from nltk.corpus import swadesh
 from nltk.book import text1 as mobydick #mobydick
 from nltk.book import text2 as sense_and_sensibility #sense_and_sensibility
 from nltk.corpus import names # male-female names
+from nltk.corpus import cmudict #pronouncing dictionary
+from nltk.corpus import stopwords # list of stopwords
 
 #1 Create a variable phrase containing a list of words. Review the operations described in the previous chapter, including addition, multiplication, indexing, slicing, and sorting.
 tempPhrase = ["Create", "a", "variable", "phrase", "containing", "a", "list", "of", "words"]
@@ -98,18 +100,66 @@ fdist1.plot(50,cumulative=True)
 #true, most words in text are stop words!!
 
 #11 Investigate the table of modal distributions and look for other patterns. Try to explain them in terms of your own impressionistic understanding of the different genres. Can you find other closed classes of words that exhibit significant differences across different genres?
+#conditional frequency distributions
+cfd = nltk.ConditionalFreqDist((genre,word)for genre in brown.categories() for word in brown.words(categories=genre))
+genres = ['news', 'religion', 'hobbies', 'science_fiction', 'romance', 'humor']
+# check distribution of 5 w's 1 h
+event_words = ["who","what","when","where","why","how"]
+#conditional frequency distributions with event_words
+cfd.tabulate(conditions=genres, samples=event_words)
+# most frequent in new is who, when;religion is who, what;hobbies is who, when,etc.
 
 #12 The CMU Pronouncing Dictionary contains multiple pronunciations for certain words. How many distinct words does it contain? What fraction of words in this dictionary have more than one possible pronunciation?
+words = [word for word,pron in cmudict.entries() ]
+wordset=set(words)
+cmu=cmudict.dict()
+print(len(words))
+print(len(wordset))
+more_than_one_pron=[word for word in wordset if len(cmu.get(word))>1]
+print(len(more_than_one_pron)/len(wordset)*100,"% words have more than one pronounciation")
 
 #13 What percentage of noun synsets have no hyponyms? You can get all noun synsets using wn.all_synsets('n').
+no_hyp_nouns=[noun for noun in wn.all_synsets('n') if len(noun.hyponyms())==0]
+all_noun_words=[noun for noun in wn.all_synsets('n')]
+print("Percentage of noun having no hyponyms: ",len(no_hyp_nouns)/len(all_noun_words)*100)
+#weird: had to define all_nouns twice as on 2 operation it was blank, mutability maybe
 
 #14 Define a function supergloss(s) that takes a synset s as its argument and returns a string consisting of the concatenation of the definition of s, and the definitions of all the hypernyms and hyponyms of s.
+def supergloss(s):
+    definitions=s.definition();
+    for hypo in s.hyponyms():
+        definitions+="\n"+hypo.definition()
+    for hyper in s.hypernyms():
+        definitions+="\n"+hyper.definition()
+    return definitions
+
+definitions = supergloss(wn.synset('car.n.01'))
+print(definitions)
 
 #15 Write a program to find all words that occur at least three times in the Brown Corpus.
+all_unique_words_brown=set(brown.words())
+brown_fd=nltk.FreqDist(brown.words())
+atleast_3times=[word for word in all_unique_words_brown if brown_fd[word]>2]
+print(atleast_3times)
 
 #16 Write a program to generate a table of lexical diversity scores (i.e. token/type ratios), as we saw in 1.1. Include the full set of Brown Corpus genres (nltk.corpus.brown.categories()). Which genre has the lowest diversity (greatest number of tokens per type)? Is this what you would have expected?
+brown_categories=brown.categories()
+print("Category, Tokens, Types, Lexical Diversity")
+for category in brown_categories:
+    category_words = brown.words(categories=category)
+    print(category,len(category_words),len(set(category_words)),len(category_words)/(len(set(category_words))*1.0))
+#science fiction has least diversity score
 
 #17 Write a function that finds the 50 most frequently occurring words of a text that are not stopwords.
+most_freq_50_fd=nltk.FreqDist(brown.words(categories='news'))
+#fd that includes stop words
+print(most_freq_50_fd.most_common(50))
+words=[word for word in most_freq_50_fd]
+for word in words:
+    if word in stopwords.words('english') or not word.isalpha():
+        most_freq_50_fd.pop(word)
+#fd that excludes stop words
+print(most_freq_50_fd.most_common(50))
 
 #18 Write a program to print the 50 most frequent bigrams (pairs of adjacent words) of a text, omitting bigrams that contain stopwords.
 
