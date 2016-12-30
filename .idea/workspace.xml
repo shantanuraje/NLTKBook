@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b94cfd9-f083-4c54-a292-1356877ebbe5" name="Default" comment="" />
+    <list default="true" id="5b94cfd9-f083-4c54-a292-1356877ebbe5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,6 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/nltkBookExcercises$ch5.coverage" NAME="ch5 Coverage Results" MODIFIED="1483058208836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/nltkBookExcercises$ch2_exercises.coverage" NAME="ch2_exercises Coverage Results" MODIFIED="1482975647374" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/nltkBookExcercises$ch3.coverage" NAME="ch3 Coverage Results" MODIFIED="1482871908784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/nltkBookExcercises$.coverage" NAME=" Coverage Results" MODIFIED="1482701701832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -55,7 +58,7 @@
       <file leaf-file-name="ch2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ch2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
+            <state relative-caret-position="256">
               <caret line="9" column="53" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="53" />
               <folding />
             </state>
@@ -65,7 +68,7 @@
       <file leaf-file-name="ch2_exercises.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ch2_exercises.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2624">
+            <state relative-caret-position="837">
               <caret line="135" column="46" lean-forward="true" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="46" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -74,42 +77,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ch4.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ch4.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="716">
-              <caret line="331" column="0" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="331" selection-end-column="79" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1808">
-              <caret line="133" column="8" lean-forward="false" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wordnet.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/corpus/reader/wordnet.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="1483" column="8" lean-forward="false" selection-start-line="1483" selection-start-column="8" selection-end-line="1483" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ch3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ch3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2384">
+            <state relative-caret-position="837">
               <caret line="142" column="19" lean-forward="true" selection-start-line="142" selection-start-column="19" selection-end-line="142" selection-end-column="19" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
@@ -119,12 +90,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/tokenize/__init__.py">
+      <file leaf-file-name="ch4.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ch4.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1264">
-              <caret line="94" column="4" lean-forward="false" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
-              <folding />
+            <state relative-caret-position="280">
+              <caret line="267" column="11" lean-forward="false" selection-start-line="267" selection-start-column="6" selection-end-line="267" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ch5.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ch5.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="773">
+              <caret line="316" column="9" lean-forward="true" selection-start-line="316" selection-start-column="9" selection-end-line="316" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,8 +121,11 @@
       <find>chat_</find>
       <find>difference</find>
       <find>/[.]/</find>
+      <find>VN'</find>
+      <find>VN</find>
       <find>...</find>
       <find>&gt;&gt;&gt;</find>
+      <find>timer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,6 +137,7 @@
         <option value="$PROJECT_DIR$/ch3.py" />
         <option value="$PROJECT_DIR$/ch2_exercises.py" />
         <option value="$PROJECT_DIR$/ch4.py" />
+        <option value="$PROJECT_DIR$/ch5.py" />
       </list>
     </option>
   </component>
@@ -213,7 +202,7 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ch4">
+  <component name="RunManager" selected="Python.ch5">
     <configuration default="false" name="ch2_exercises" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -246,6 +235,24 @@
       <module name="nltkBookExcercises" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ch4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ch5" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="nltkBookExcercises" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ch5.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -499,15 +506,17 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Python.ch3" />
       <item index="1" class="java.lang.String" itemvalue="Python.ch2_exercises" />
       <item index="2" class="java.lang.String" itemvalue="Python.ch4" />
+      <item index="3" class="java.lang.String" itemvalue="Python.ch5" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Python.ch4" />
-        <item index="1" class="java.lang.String" itemvalue="Python.ch2_exercises" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Python.ch5" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ch4" />
+        <item index="2" class="java.lang.String" itemvalue="Python.ch2_exercises" />
       </list>
     </recent_temporary>
   </component>
@@ -543,7 +552,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.521855" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3379531" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5442431" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="1880" y="138" width="990" height="946" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.60287845" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="1880" y="138" width="990" height="946" />
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5138593" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27665246" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5191898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -693,14 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ch2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="9" column="53" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ch1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
@@ -725,9 +726,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1808">
+          <caret line="133" column="8" lean-forward="false" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="9" column="53" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ch2_exercises.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2624">
+        <state relative-caret-position="837">
           <caret line="135" column="46" lean-forward="true" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="46" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -737,7 +754,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ch3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2384">
+        <state relative-caret-position="837">
           <caret line="142" column="19" lean-forward="true" selection-start-line="142" selection-start-column="19" selection-end-line="142" selection-end-column="19" />
           <folding>
             <element signature="e#0#48#0" expanded="true" />
@@ -746,20 +763,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/util.py">
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1808">
-          <caret line="133" column="8" lean-forward="false" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="8" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ch4.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="331" column="0" lean-forward="false" selection-start-line="331" selection-start-column="0" selection-end-line="331" selection-end-column="79" />
+        <state relative-caret-position="280">
+          <caret line="267" column="11" lean-forward="false" selection-start-line="267" selection-start-column="6" selection-end-line="267" selection-end-column="11" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="773">
+          <caret line="316" column="9" lean-forward="true" selection-start-line="316" selection-start-column="9" selection-end-line="316" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
