@@ -1,4 +1,5 @@
 import nltk
+import re
 from nltk.corpus import gutenberg
 from nltk.corpus import brown
 from nltk.corpus import state_union
@@ -9,6 +10,9 @@ from nltk.book import text2 as sense_and_sensibility #sense_and_sensibility
 from nltk.corpus import names # male-female names
 from nltk.corpus import cmudict #pronouncing dictionary
 from nltk.corpus import stopwords # list of stopwords
+from matplotlib import pyplot
+import random
+from nltk.corpus import wordnet as wn
 
 #1 Create a variable phrase containing a list of words. Review the operations described in the previous chapter, including addition, multiplication, indexing, slicing, and sorting.
 tempPhrase = ["Create", "a", "variable", "phrase", "containing", "a", "list", "of", "words"]
@@ -104,9 +108,9 @@ fdist1.plot(50,cumulative=True)
 cfd = nltk.ConditionalFreqDist((genre,word)for genre in brown.categories() for word in brown.words(categories=genre))
 genres = ['news', 'religion', 'hobbies', 'science_fiction', 'romance', 'humor']
 # check distribution of 5 w's 1 h
-event_words = ["who","what","when","where","why","how"]
+general_words = ["who", "what", "when", "where", "why", "how"]
 #conditional frequency distributions with event_words
-cfd.tabulate(conditions=genres, samples=event_words)
+cfd.tabulate(conditions=genres, samples=general_words)
 # most frequent in new is who, when;religion is who, what;hobbies is who, when,etc.
 
 #12 The CMU Pronouncing Dictionary contains multiple pronunciations for certain words. How many distinct words does it contain? What fraction of words in this dictionary have more than one possible pronunciation?
@@ -162,23 +166,152 @@ for word in words:
 print(most_freq_50_fd.most_common(50))
 
 #18 Write a program to print the 50 most frequent bigrams (pairs of adjacent words) of a text, omitting bigrams that contain stopwords.
+# brown_word_bigrams = nltk.bigrams(brown.words(categories="romance"))
+bigrams_without_stopwords = [(a,b) for a,b in nltk.bigrams(brown.words(categories="romance")) if a not in stopwords.words('english') and b not in stopwords.words('english')]
+bigrams_without_stopwords_fd = nltk.FreqDist(bigrams_without_stopwords)
+print(bigrams_without_stopwords_fd.most_common(50))
 
 #19 Write a program to create a table of word frequencies by genre, like the one given in 1 for modals. Choose your own words and try to find words whose presence (or absence) is typical of a genre. Discuss your findings.
+cfd = nltk.ConditionalFreqDist((genre,word)for genre in brown.categories() for word in brown.words(categories=genre))
+# check distribution of "love","hate","death","life","marriage","work","children"
+general_words = ["love", "hate", "death", "life", "marriage", "work", "children","magic"]
+#conditional frequency distributions with event_words
+cfd.tabulate(conditions=brown.categories(), samples=general_words)
+#conclusion: belles_letters contains alot of refrences to life and work
+#learned category has a lot of refrences to work
+#lore contains a lot of refrences to life
+# religion contains most refrences to life death work and magic
 
 #20 Write a function word_freq() that takes a word and the name of a section of the Brown Corpus as arguments, and computes the frequency of the word in that section of the corpus.
+def word_freq(word,category):
+    category_text=brown.words(categories=category)
+    return sum(1 for wd in category_text if wd==word)
+
+print(word_freq("work","learned"))
 
 #21 Write a program to guess the number of syllables contained in a text, making use of the CMU Pronouncing Dictionary.
+# a unit of pronunciation having one vowel sound, with or without surrounding consonants, forming the whole or a part of a word; e.g., there are two syllables in water and three in inferno.
+#easiest guess - number of vowels = number of syllables
+#previous example
+#syllable = ['N','IH0','K','S'] this syllable contains one vowel
+cmu_dict = cmudict.entries()
+print(len(cmu_dict))
+# print(cmu_dict['water']) # contains 2 vowels so two syllables
+#get a text
+print(len(brown.words(categories='hobbies')))
+print(len(set(brown.words(categories='hobbies'))))
+brown_hobbies=sorted(set(brown.words(categories='hobbies')))
+brown_hobbies_dict_words = [(word,pron) for word,pron in cmu_dict if word in brown_hobbies]
+print(len(brown_hobbies_dict_words))
+def count_syllables(pron):
+    return len([w for w in pron if re.findall("[aeiou]",w.lower())])
+
+no_of_syll_per_word = [count_syllables(pron) for word,pron in brown_hobbies_dict_words]
+print("Number of syllables contained in brown corpus hobbies category: ",sum(no_of_syll_per_word))
 
 #22 Define a function hedge(text) which processes a text and produces a new version with the word 'like' between every third word.
+def hedge(text):
+    # test = 'this is a test sentence to insert like after every third word'.split()
+    ids = [index-1 for index in list(range(3,len(text)+1,3))]
+    for id in ids:
+        text.insert(id,'like')
+    return text
 
-#23 Zipf's Law: Let f(w) be the frequency of a word w in free text. Suppose that all the words of a text are ranked according to their frequency, with the most frequent word first. Zipf's law states that the frequency of a word type is inversely proportional to its rank (i.e. f × r = k, for some constant k). For example, the 50th most common word type should occur three times as frequently as the 150th most common word type.Write a function to process a large text and plot word frequency against word rank using pylab.plot. Do you confirm Zipf's law? (Hint: it helps to use a logarithmic scale). What is going on at the extreme ends of the plotted line? Generate random text, e.g., using random.choice("abcdefg "), taking care to include the space character. You will need to import random first. Use the string concatenation operator to accumulate characters into a (very) long string. Then tokenize this string, and generate the Zipf plot as before, and compare the two plots. What do you make of Zipf's Law in the light of this?
+test_text=hedge('this is a test sentence to insert like after every third word'.split())
+print(test_text)
 
-#24 Modify the text generation program in 2.2 further, to do the following tasks:Store the n most likely words in a list words then randomly choose a word from the list using random.choice(). (You will need to import random first.)Select a particular genre, such as a section of the Brown Corpus, or a genesis translation, one of the Gutenberg texts, or one of the Web texts. Train the model on this corpus and get it to generate random text. You may have to experiment with different start words. How intelligible is the text? Discuss the strengths and weaknesses of this method of generating random text.Now train your system using two distinct genres and experiment with generating text in the hybrid genre. Discuss your observations.
+#23 Zipf's Law: Let f(w) be the frequency of a word w in free text. Suppose that all the words of a text are ranked according to their frequency, with the most frequent word first. Zipf's law states that the frequency of a word type is inversely proportional to its rank (i.e. f × r = k, for some constant k). For example, the 50th most common word type should occur three times as frequently as the 150th most common word type.
+# Write a function to process a large text and plot word frequency against word rank using pylab.plot. Do you confirm Zipf's law? (Hint: it helps to use a logarithmic scale). What is going on at the extreme ends of the plotted line?
+def zipfs_law(text,n):
+    text_fd=nltk.FreqDist(text)
+    text_fd_common=text_fd.most_common(n)
+    freqs=[y for x,y in text_fd_common]
+    ranks=[1/freq for freq in freqs]
+    pyplot.plot(ranks,freqs)
+
+zipfs_law(nltk.corpus.gutenberg.words('austen-sense.txt'),50)
+# zipfs_law(nltk.corpus.gutenberg.words('austen-sense.txt'),100)
+# zipfs_law(nltk.corpus.gutenberg.words('austen-sense.txt'),500)
+#looks inversely proportional but is the solution correct??
+
+# Generate random text, e.g., using random.choice("abcdefg "), taking care to include the space character. You will need to import random first. Use the string concatenation operator to accumulate characters into a (very) long string. Then tokenize this string, and generate the Zipf plot as before, and compare the two plots. What do you make of Zipf's Law in the light of this?
+random_text=''
+for i in range(0,random.randrange(10000,1000000)):
+    random_text+=random.choice("abcdefg ")
+# print(random_text)
+zipfs_law(random_text.split(' '),100)
+#yes it is almost inversely proportion
+
+#24 Modify the text generation program in 2.2 further, to do the following tasks:
+def generate_model(text, n):
+    text_fd=nltk.FreqDist(text)
+    text_fd_common=text_fd.most_common(n)
+    rand_words = [word for word,index in text_fd_common]
+    return rand_words
+
+# Store the n most likely words in a list words then randomly choose a word from the list using random.choice(). (You will need to import random first.)
+
+text = nltk.corpus.genesis.words('english-kjv.txt')
+genesis_rand_words = generate_model(text, 100)
+print(genesis_rand_words)
+print(random.choice(genesis_rand_words))
+
+# Select a particular genre, such as a section of the Brown Corpus, or a genesis translation, one of the Gutenberg texts, or one of the Web texts. Train the model on this corpus and get it to generate random text. You may have to experiment with different start words. How intelligible is the text? Discuss the strengths and weaknesses of this method of generating random text.
+
+brown_romance=brown.words(categories='romance')
+brown_romance_rand = generate_model(brown_romance,200)
+print(brown_romance_rand,len(brown_romance_rand))
+#we could use title case words to be start words.
+#sentences have to end in anyone of the punctuation marks
+def generate_sentence(text):
+    start_words = set(word for word in brown_romance_rand if word.istitle())
+    punc_symbols = set(word for word in brown_romance_rand if not word.isalpha() and len(word) == 1)
+    other_words = set(brown_romance_rand).difference(punc_symbols)
+    other_words = list(other_words)
+    start_words = list(start_words)
+    punc_symbols = list(punc_symbols)
+    limit_1 = random.randrange(1, len(other_words))
+    limit_2 = random.randrange(1, len(other_words))
+
+    if limit_1 < limit_2:
+        rand_indices = list(range(limit_1, limit_2))
+        other_indexes = [random.choice(rand_indices) for id in rand_indices]
+        wordlist = [other_words[id] for id in other_indexes]
+    else:
+        rand_indices = list(range(limit_2, limit_1))
+        other_indexes = [random.choice(rand_indices) for id in rand_indices]
+        wordlist = [other_words[id] for id in other_indexes]
+
+    wordlist.insert(0,random.choice(start_words))
+    wordlist.append(random.choice(punc_symbols))
+    print(" ".join(wordlist))
+
+generate_sentence(brown_romance)
+#this method generated non sensical text with one title case word at start, one punctuation mark at the end and a random selection of words in between
+
+# Now train your system using two distinct genres and experiment with generating text in the hybrid genre. Discuss your observations.
+generate_sentence(brown_romance+brown.words(categories='religion'))
 
 #25 Define a function find_language() that takes a string as its argument, and returns a list of languages that have that string as a word. Use the udhr corpus and limit your searches to files in the Latin-1 encoding.
+latin1_files = [f for f in nltk.corpus.udhr.fileids() if re.search(r'Latin1',f)]
+
+def find_language(word,latin1_files):
+    return sum([1 for file in latin1_files for w in nltk.corpus.udhr.words(file) if word in w])
+
+word_count_latin1=find_language("human",latin1_files)
+print(word_count_latin1)
+word_count_latin1=find_language("rights",latin1_files)
+print(word_count_latin1)
 
 #26 What is the branching factor of the noun hypernym hierarchy? I.e. for every noun synset that has hyponyms — or children in the hypernym hierarchy — how many do they have on average? You can get all noun synsets using wn.all_synsets('n').
+all_synsets=wn.all_synsets('n')
+hyper_counts=[len(syn.hypernyms()) for syn in all_synsets]
+average_num_hyper=sum(hyper_counts)/len(hyper_counts)
+print("branching factor of the noun hypernym hierarchy: ",average_num_hyper)
 
 #27 The polysemy of a word is the number of senses it has. Using WordNet, we can determine that the noun dog has 7 senses with: len(wn.synsets('dog', 'n')). Compute the average polysemy of nouns, verbs, adjectives and adverbs according to WordNet.
+#*.[nvas].*
+all_synsets = wn.all_synsets()
+synsets_per_word = [synst for synst in all_synsets]
 
 #28 Use one of the predefined similarity measures to score the similarity of each of the following pairs of words. Rank the pairs in order of decreasing similarity. How close is your ranking to the order given here, an order that was established experimentally by (Miller & Charles, 1998): car-automobile, gem-jewel, journey-voyage, boy-lad, coast-shore, asylum-madhouse, magician-wizard, midday-noon, furnace-stove, food-fruit, bird-cock, bird-crane, tool-implement, brother-monk, lad-brother, crane-implement, journey-car, monk-oracle, cemetery-woodland, food-rooster, coast-hill, forest-graveyard, shore-woodland, monk-slave, coast-forest, lad-wizard, chord-smile, glass-magician, rooster-voyage, noon-string.
