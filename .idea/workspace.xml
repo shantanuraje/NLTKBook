@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b94cfd9-f083-4c54-a292-1356877ebbe5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch2_exercises.py" afterPath="$PROJECT_DIR$/ch2_exercises.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ch5.py" afterPath="$PROJECT_DIR$/ch5.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -68,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ch2_exercises.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ch2_exercises.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ch2_exercises.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="305" column="163" lean-forward="false" selection-start-line="305" selection-start-column="163" selection-end-line="305" selection-end-column="163" />
+            <state relative-caret-position="722">
+              <caret line="316" column="675" lean-forward="true" selection-start-line="316" selection-start-column="675" selection-end-line="316" selection-end-column="675" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -113,14 +112,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ch5.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ch5.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ch5.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="547">
+              <caret line="381" column="34" lean-forward="true" selection-start-line="381" selection-start-column="34" selection-end-line="381" selection-end-column="35" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="brill.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/tag/brill.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="581">
+              <caret line="414" column="50" lean-forward="true" selection-start-line="414" selection-start-column="50" selection-end-line="414" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="probability.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/probability.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="1773" column="36" lean-forward="true" selection-start-line="1772" selection-start-column="8" selection-end-line="1773" selection-end-column="49" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -134,7 +153,6 @@
       <find>/[.]/</find>
       <find>VN'</find>
       <find>VN</find>
-      <find>...</find>
       <find>&gt;&gt;&gt;</find>
       <find>timer</find>
       <find>bigram</find>
@@ -151,6 +169,8 @@
       <find>isal</find>
       <find>re.</find>
       <find>dog</find>
+      <find>...</find>
+      <find>&gt;&gt;&gt;</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\shant\workspace\nltkBookExcercises</dir>
@@ -164,8 +184,8 @@
       <list>
         <option value="$PROJECT_DIR$/ch3.py" />
         <option value="$PROJECT_DIR$/ch4.py" />
-        <option value="$PROJECT_DIR$/ch5.py" />
         <option value="$PROJECT_DIR$/ch2_exercises.py" />
+        <option value="$PROJECT_DIR$/ch5.py" />
       </list>
     </option>
   </component>
@@ -566,7 +586,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.521855" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4402985" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3379531" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.56023455" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1880" y="138" width="990" height="946" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5261194" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="1880" y="138" width="990" height="946" />
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5138593" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27665246" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5191898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -751,29 +771,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/probability.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1312">
-          <caret line="250" column="25" lean-forward="true" selection-start-line="250" selection-start-column="25" selection-end-line="250" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/pylab.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ch5.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -805,8 +807,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ch2_exercises.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="305" column="163" lean-forward="false" selection-start-line="305" selection-start-column="163" selection-end-line="305" selection-end-column="163" />
+        <state relative-caret-position="722">
+          <caret line="316" column="675" lean-forward="true" selection-start-line="316" selection-start-column="675" selection-end-line="316" selection-end-column="675" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/probability.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="1773" column="36" lean-forward="true" selection-start-line="1772" selection-start-column="8" selection-end-line="1773" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Anaconda3/Lib/site-packages/nltk/tag/brill.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="581">
+          <caret line="414" column="50" lean-forward="true" selection-start-line="414" selection-start-column="50" selection-end-line="414" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch5.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="381" column="34" lean-forward="true" selection-start-line="381" selection-start-column="34" selection-end-line="381" selection-end-column="35" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
