@@ -57,16 +57,22 @@ print(re.findall(r'(<.*?>|<\/.*?>)',raw)) # ? makes * non greedy
 #9 Save some text into a file corpus.txt. Define a function load(f) that reads from the file named in its sole argument, and returns a string containing the text of the file.
 # Use nltk.regexp_tokenize() to create a tokenizer that tokenizes the various kinds of punctuation in this text. Use one multi-line regular expression, with inline comments, using the verbose flag (?x).
 # Use nltk.regexp_tokenize() to create a tokenizer that tokenizes the following kinds of expression: monetary amounts; dates; names of people and organizations.
-# def load(f):
-#     with open(f,'r') as text:
-#         text_data=text.read()
+def load(f):
+    # with open(f,'r') as text:
+    #     text_data=text.read()
+    text_data=f
+    all_punctations_set = set(nltk.regexp_tokenize(text_data,r'''(?x)    # set flag to allow verbose regexps
+                                                          [\.,;:!?\'"-] #captures this group of punctuation marks
+                                                          |[\[\]\(\)\{\}\<\>] #captures all types of brackets'''))
+    print(all_punctations_set)
+    # print(text_data)
+    tokenized_text = nltk.regexp_tokenize(text_data,r'''(?x) # set flag to allow verbose regexps
+                             \$?\d+(\.\d+)?%? #find monetary values
+                            |[0-9]{4} #find just yyyy
+                            |[A-Z][a-z]* [A-Z][a-z]* #find names by check 2 consecutive words are title case''')
+    print(tokenized_text)
 
-with open('tale_of_peter_rabbit.txt','r') as f:
-    text_data=f.read()
-    print(type(text_data))
-
-nltk.regexp_tokenize()
-
+load(' '.join(nltk.corpus.brown.words()))
 #10 Rewrite the following loop as a list comprehension:
 # >>> sent = ['The', 'dog', 'gave', 'John', 'the', 'newspaper']
 # >>> result = []
@@ -75,29 +81,75 @@ nltk.regexp_tokenize()
 # ...     result.append(word_len)
 # >>> result
 # [('The', 3), ('dog', 3), ('gave', 4), ('John', 4), ('the', 3), ('newspaper', 9)]
+sent = ['The', 'dog', 'gave', 'John', 'the', 'newspaper']
+result =[(word,len(word)) for word in sent]
+print(result)
 
 #11 Define a string raw containing a sentence of your own choosing. Now, split raw on some character other than space, such as 's'.
+raw="This is a sample string"
+print(raw.split('s'))
 
 #12 Write a for loop to print out the characters of a string, one per line.
+for ch in raw:
+    print(ch,end='\n')
 
 #13 What is the difference between calling split on a string with no argument or with ' ' as the argument, e.g. sent.split() versus sent.split(' ')? What happens when the string being split contains tab characters, consecutive space characters, or a sequence of tabs and spaces? (In IDLE you will need to use '\t' to enter a tab character.)
+# calling split on a string with no argument or with ' ' - splits by space by default
+# sent.split(' ') - splits by space
+# string being split contains tab characters, consecutive space characters - still splits by space, list also contains elements that are tab characters, if consec spcaes then multiple '' are in the list
 
 #14 Create a variable words containing a list of words. Experiment with words.sort() and sorted(words). What is the difference?
+raw_words=nltk.corpus.brown.sents()[0]
+print(raw_words)
+raw_words.sort()
+print(raw_words)
+raw_words=nltk.corpus.brown.sents()[0]
+print(sorted(raw_words))
+# .sort sorts the same list, sorted creates a new list
 
 #15 Explore the difference between strings and integers by typing the following at a Python prompt: "3" * 7 and 3 * 7. Try converting between strings and integers using int("3") and str(3).
+print("5"*10)
+print(5*10)
+print(int("5")*10)
+print(5*str(10))
 
 #16 Use a text editor to create a file called prog.py containing the single line monty = 'Monty Python'. Next, start up a new session with the Python interpreter, and enter the expression monty at the prompt. You will get an error from the interpreter. Now, try the following (note that you have to leave off the .py part of the filename):
 # >>> from prog import monty
 # >>> monty
 # This time, Python should return with a value. You can also try import prog, in which case Python should be able to evaluate the expression prog.monty at the prompt.
+from ch3_ex_16 import monty
+print(monty)
 
 #17 What happens when the formatting strings %6s and %-6s are used to display strings that are longer than six characters?
+print("Number is : %6s" % 'thisisaword')
+print("Number is : %-6s" % 'thisisaword')
+print("Number is : %6s" % 'aword')
+print("Number is : %-6s" % 'aword')
+#both prints successfully printed all the charaters irrespective of len of string
 
 #18 Read in some text from a corpus, tokenize it, and print the list of all wh-word types that occur. (wh-words in English are used in questions, relative clauses and exclamations: who, which, what, and so on.) Print them in order. Are any words duplicated in this list, because of the presence of case distinctions or punctuation?
+wh_words=[word for word in nltk.corpus.brown.words() if word.lower()[:2]=='wh' and len(word)<5]
+print(sorted(set(wh_words)))
+#yes there are duplicates due to difference in case and also other punctuations such as What's
 
 #19 Create a file consisting of words and (made up) frequencies, where each line consists of a word, the space character, and a positive integer, e.g. fuzzy 53. Read the file into a Python list using open(filename).readlines(). Next, break each line into its two fields using split(), and convert the number into an integer using int(). The result should be a list of the form: [['fuzzy', 53], ...].
+result=[]
+with open('ch3_ex_19.txt','r') as f:
+    for line in f.readlines():
+        # print(line)
+        line=line.split()
+        # print(line)
+        result.append([str(line[0]),int(line[1])])
+
+print(result)
 
 #20 Write code to access a favorite webpage and extract some text from it. For example, access a weather site and extract the forecast top temperature for your town or city today.
+url="https://jobs.uncc.edu/postings/search?&query=&query_v0_posted_at_date=&query_organizational_tier_2_id=any&1976=&2074=&2075=7&commit=Search"
+response=request.urlopen(url)
+raw=response.read().decode('utf8')
+new_jobs = [job[20:len(job)-2] for job in re.findall(r"data\-posting\-title=\".*",raw)]
+print(new_jobs)
+#extract jobs from jobs.uncc.edu
 
 #21 Write a function unknown() that takes a URL as its argument, and returns a list of unknown words that occur on that webpage. In order to do this, extract all substrings consisting of lowercase letters (using re.findall()) and remove any items from this set that occur in the Words Corpus (nltk.corpus.words). Try to categorize these words manually and discuss your findings.
 
