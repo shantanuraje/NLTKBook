@@ -50,10 +50,12 @@ print(nltk.re_show(r'([0-9][\+\-\*]|[0-9])*',test_exp))
 url="http://nltk.org"
 response=request.urlopen(url)
 raw=response.read().decode('utf8')
+print(raw)
 print(re.search(r'(<.*?>|<\/.*?>)',raw)) # ? makes * non greedy
 print(re.findall(r'(<.*?>|<\/.*?>)',raw)) # ? makes * non greedy
 # (<.*?>|<\/.*?>)
-
+# (<.*?>|<\/.*?>)(?s)
+#re.sub
 #9 Save some text into a file corpus.txt. Define a function load(f) that reads from the file named in its sole argument, and returns a string containing the text of the file.
 # Use nltk.regexp_tokenize() to create a tokenizer that tokenizes the various kinds of punctuation in this text. Use one multi-line regular expression, with inline comments, using the verbose flag (?x).
 # Use nltk.regexp_tokenize() to create a tokenizer that tokenizes the following kinds of expression: monetary amounts; dates; names of people and organizations.
@@ -152,8 +154,24 @@ print(new_jobs)
 #extract jobs from jobs.uncc.edu
 
 #21 Write a function unknown() that takes a URL as its argument, and returns a list of unknown words that occur on that webpage. In order to do this, extract all substrings consisting of lowercase letters (using re.findall()) and remove any items from this set that occur in the Words Corpus (nltk.corpus.words). Try to categorize these words manually and discuss your findings.
+def unknown(url):
+    response=request.urlopen(url)
+    raw=response.read().decode('utf8')
+    words = [word.lower() for word in re.sub(r'(<.*?>|<\/.*?>)(?s)', '', raw).split() if word.isalpha()]
+    words_fd =nltk.FreqDist(words)
+    # print(words_fd.most_common(10))
+    nltk_words = nltk.corpus.words.words()
+    unknown_words = set([word for word in words if word not in nltk_words])
+    print(unknown_words)
+#result consists of plurals, verb ending in ing, clubbed words like toolkit, treebank, person names
+unknown('http://www.nltk.org/book/ch03.html')
+# unknown('http://www.nltk.org/book/ch07.html')
+# unknown('https://jobs.uncc.edu/postings/search?&query=&query_v0_posted_at_date=&query_organizational_tier_2_id=any&1976=&2074=&2075=7&commit=Search"')
 
 #22 Examine the results of processing the URL http://news.bbc.co.uk/ using the regular expressions suggested above. You will see that there is still a fair amount of non-textual data there, particularly Javascript commands. You may also find that sentence breaks have not been properly preserved. Define further regular expressions that improve the extraction of text from this web page.
+response = request.urlopen('http://news.bbc.co.uk/')
+raw = response.read().decode('utf8')
+print(re.sub(r'(<.*?>|<\/.*?>)(?s)', '', raw))
 
 #23 Are you able to write a regular expression to tokenize text in such a way that the word don't is tokenized into do and n't? Explain why this regular expression won't work: «n't|\w+».
 
