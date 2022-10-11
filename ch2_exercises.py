@@ -81,7 +81,7 @@ print(sense_and_sensibility.concordance('however'))
 
 #8 Define a conditional frequency distribution over the Names corpus that allows you to see which initial letters are more frequent for males vs. females (cf. 4.4).
 #cfd against last letters for all names to check well known fact that names ending in letter a are almost always female
-cfd = nltk.ConditionalFreqDist((fileid,name[1]) for fileid in names.fileids() for name in names.words(fileid))
+cfd = nltk.ConditionalFreqDist((fileid,name[0]) for fileid in names.fileids() for name in names.words(fileid))
 cfd.plot()
 
 #9 Pick a pair of texts and study the differences between them, in terms of vocabulary, vocabulary richness, genre, etc. Can you find pairs of words which have quite different meanings across the two texts, such as monstrous in Moby Dick and in Sense and Sensibility?
